@@ -1,10 +1,8 @@
-/**
- * Created by User on 09.10.2019.
- */
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {complete} from '../reducers/todos/actions';
+import {remove} from '../reducers/todos/actions';
 
 const styles = {
     li: {
@@ -31,6 +29,7 @@ class TodoItem extends PureComponent {
             id: PropTypes.number,
         }).isRequired,
         onDone: PropTypes.func.isRequired,
+        onRemove: PropTypes.func.isRequired,
     };
 
     onDone = () => {
@@ -39,8 +38,8 @@ class TodoItem extends PureComponent {
     }
 
     onRemove = () => {
-        const {item, removeTodo} = this.props;
-        removeTodo(item);
+        const {item, onRemove} = this.props;
+        onRemove(item.id);
     }
 
     render() {
@@ -64,6 +63,7 @@ export default connect(
         items: state.todos.list,
     }),
     dispatch => ({
-        onDone: id => complete(id),
+        onDone: id => dispatch(complete(id)),
+        onRemove: id => dispatch(remove(id)),
     }),
 )(TodoItem);

@@ -3,6 +3,7 @@
  */
 import React, {PureComponent} from 'react';
 import TodoItem from "./TodoItem";
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 const styles = {
@@ -17,19 +18,16 @@ class TodoList extends PureComponent {
 
     static propTypes = {
         items: PropTypes.arrayOf(PropTypes.object).isRequired,
-        onRemove: PropTypes.func.isRequired,
     };
 
     render() {
-        const {items, onRemove} = this.props;
-
+        const {items} = this.props;
         return (
             <ul className="list-group" style={styles.ul}>
                 {
                     items.length ? items.map((item) => {
                         return <TodoItem item={item}
                                          key={item.id}
-                                         removeTodo={onRemove}
                         />
                     }) : <h3 className="list-group-empty">TodoList is empty!</h3>
                 }
@@ -38,4 +36,7 @@ class TodoList extends PureComponent {
     }
 }
 
-export default TodoList;
+export default connect(state => ({
+        items: state.todos.list,
+    }),
+)(TodoList);

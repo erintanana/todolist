@@ -11,28 +11,12 @@ class App extends PureComponent {
         items: PropTypes.array,
     };
 
-    // completeTodo = (item) => {
-    //     const items = this.state.items.map(el => {
-    //         if (el.id === item.id) {
-    //             return {...el, isDone: !el.isDone};
-    //         }
-    //         return el;
-    //     });
-    //     this.setState({items});
-    // }
-
-    removeTodo = (item) => {
-        const items = this.state.items.filter(el => el.id !== item.id);
-        this.setState({items});
-    }
-
     render() {
-        const {items} = this.props;
 
         return (
             <div className="wrapper">
                 <h2>Todo List</h2>
-                <TodoList items={items} onRemove={this.removeTodo}/>
+                <TodoList />
                 <TodoAddForm />
             </div>
         );

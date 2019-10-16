@@ -12,6 +12,7 @@ const todos = (state = initState, action) => {
                 ...state,
                 lastId: state.lastId + 1,
             };
+
         case TYPES.ADD_TODO:
             return {
                 ...state,
@@ -20,15 +21,25 @@ const todos = (state = initState, action) => {
                     task: action.task,
                     isDone: false
                 }],
-            }
+            };
 
         case TYPES.COMPLETE_TODO:
-            return state.list.map(todo =>
-                todo.id === action.id ? {...todo, isDone: !todo.isDone} : todo
-            )
+            return {
+                list: state.list.map(todo =>
+                    todo.id === action.id ? {...todo, isDone: !todo.isDone} : todo
+                ),
+                lastId: state.lastId,
+            };
+
+        case TYPES.REMOVE_TODO:
+            return {
+                list: state.list.filter(el => el.id !== action.id),
+                lastId: state.lastId,
+            };
+
         default:
-            return state
+            return state;
     }
 }
 
-export default todos
+export default todos;
