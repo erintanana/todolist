@@ -13,6 +13,23 @@ body {
     width: 70%;
 }
 
+.todo-app-header {
+    background-color: #FFE4B5;
+    opacity: 0.8;
+    border-radius: 10px;
+    height: 3em;
+    display: flex;
+    align-items: center;
+}
+
+.todo-app-header-text {
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    color: #3c3f47;
+    font-weight: bold;
+}
+
 .list-group-item-checkbox {
     background: #FDF5E6;
     border: 1px solid #FFE4B5;
@@ -52,4 +69,5 @@ body {
 .add-todo-form-button:hover {
     background: #FFE4B5;
 }
+
 
